@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  output: 'export', // دي بتخليه يخرج ملفات ثابتة تفتح في أي مكان
   turbopack: {
     rules: {
       "*.css": {
