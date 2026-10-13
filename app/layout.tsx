@@ -47,7 +47,7 @@ export default function RootLayout({
         {/* تذييل الصفحة الفخم - Footer */}
         <footer className="bg-slate-950/80 border-t border-indigo-500/10 py-8 px-6 text-center text-slate-400 text-sm mt-12 backdrop-blur-sm">
           <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="font-medium">جميع الحقوق محفوظة © {new Date().getFullYear()} - <span className="text-cyan-400 font-bold">أكاديمية أثر</span> 🚀</p>
+            <p className="font-medium">جميع الحقوق محفوظة © 2026 - <span className="text-cyan-400 font-bold">أكاديمية أثر</span> 🚀</p>
             <div className="flex gap-6 text-slate-400">
               <a href="#" className="hover:text-cyan-400 transition-colors">عن المنصة</a>
               <a href="#" className="hover:text-cyan-400 transition-colors">الشروط والأحكام</a>
