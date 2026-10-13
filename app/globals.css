@@ -1,1 +1,22 @@
 @import "tailwindcss";
+/* خلفية العلامة المائية لأكاديمية أثر */
+body {
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('/watermark.jpg');
+  background-repeat: repeat;
+  background-position: center;
+  background-size: 200px;
+  opacity: 0.04;
+  transform: rotate(-12deg) scale(1.1);
+  pointer-events: none;
+  z-index: 999;
+}
