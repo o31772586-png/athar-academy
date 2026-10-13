@@ -17,8 +17,14 @@ body::before {
   background-repeat: repeat;
   background-position: center;
   background-size: 250px;
-  opacity: 0.08;
+  
+  /* زيادة الوضوح ودرجة الظهور */
+  opacity: 0.12; 
+  
+  /* تصفية لونية تخليه يندمج بفخامة مع ألوان الموقع من غير ما يعكس لون مزعج */
+  mix-blend-mode: multiply; 
+  
   transform: rotate(-12deg);
   pointer-events: none;
-  z-index: 1;
+  z-index: 10; /* عشان نضمن إنه فوق الخلفية وبوضوح */
 }
