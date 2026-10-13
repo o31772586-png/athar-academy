@@ -1,8 +1,9 @@
-export const dynamic = 'force-dynamic';
 'use client';
+
+export const dynamic = 'force-dynamic';
+
 import { useState, use, useEffect } from 'react';
 import Link from 'next/link';
-export const dynamic = 'force-dynamic';
 export default function CourseDetails({ params }: { params: Promise<{ id: string }> }) {
   const resolvedParams = use(params);
   const courseId = parseInt(resolvedParams.id);
