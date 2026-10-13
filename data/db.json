@@ -1,0 +1,26 @@
+{
+  "users": [],
+  "courses": [
+    {
+      "id": 1,
+      "title": "مقدمة في البرمجة بلغة جافا (OOP)",
+      "description": "تعلم أساسيات البرمجة كائني التوجه، الوراثة، وتعدد الأشكال خطوة بخطوة.",
+      "tutor": "د. أحمد المهندس",
+      "duration": "4 ساعات",
+      "level": "مبتدئ"
+    },
+    {
+      "id": 2,
+      "title": "أساسيات تطوير الويب الحديث",
+      "description": "دورة متكاملة لبناء صفحات الويب باستخدام HTML, CSS و JavaScript.",
+      "tutor": "م. محمود علي",
+      "duration": "6 ساعات",
+      "level": "متوسط"
+    }
+  ],
+  "lessons": [
+    { "id": 1, "title": "مفهوم الكลาส والكائن (Class & Object)", "duration": "20 دقيقة", "courseId": 1 },
+    { "id": 2, "title": "مبدأ الوراثة (Inheritance)", "duration": "25 دقيقة", "courseId": 1 },
+    { "id": 3, "title": "مدخل إلى HTML5", "duration": "15 دقيقة", "courseId": 2 }
+  ]
+}
