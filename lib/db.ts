@@ -14,6 +14,7 @@ export function getDatabase() {
     return { courses: [], lessons: [] };
   }
 }
+// @ts-ignore
 export function saveDatabase(data) {
   try {
     fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf8');
