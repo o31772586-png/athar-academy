@@ -8,36 +8,53 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const [userName, setUserName] = useState<string | null>(null);
-  const [mounted, setMounted] = useState(false);
+  const [user, setUser] = useState<{ name: string } | null>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
 
-  const checkUser = () => {
+  const checkAuth = () => {
     if (typeof window !== 'undefined') {
-      const savedName = localStorage.getItem('userName') || localStorage.getItem('userEmail');
-      setUserName(savedName);
+      const email = localStorage.getItem('userEmail');
+      const name = localStorage.getItem('userName');
+      const currentUser = localStorage.getItem('currentUser');
+
+      let foundName = '';
+      if (currentUser) {
+        try {
+          const parsed = JSON.parse(currentUser);
+          foundName = parsed.name || parsed.email;
+        } catch (e) {
+          foundName = currentUser;
+        }
+      } else if (name) {
+        foundName = name;
+      } else if (email) {
+        foundName = email;
+      }
+
+      if (foundName) {
+        setUser({ name: foundName.split('@')[0] });
+      } else {
+        setUser(null);
+      }
     }
   };
 
   useEffect(() => {
-    setMounted(true);
-    checkUser();
+    setIsLoaded(true);
+    checkAuth();
 
-    // فحص دوري وسريع للحالة عند التنقل
-    const interval = setInterval(checkUser, 300);
-    window.addEventListener('storage', checkUser);
+    const interval = setInterval(checkAuth, 400);
+    window.addEventListener('storage', checkAuth);
 
     return () => {
       clearInterval(interval);
-      window.removeEventListener('storage', checkUser);
+      window.removeEventListener('storage', checkAuth);
     };
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem('currentUser');
-    localStorage.removeItem('userEmail');
-    localStorage.removeItem('userName');
-    localStorage.removeItem('isAdmin');
-    setUserName(null);
+    localStorage.clear();
+    setUser(null);
     window.location.href = '/login';
   };
 
@@ -45,11 +62,10 @@ export default function RootLayout({
     <html lang="ar" dir="rtl">
       <body className="bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 text-slate-100 min-h-screen flex flex-col font-sans selection:bg-indigo-500 selection:text-white">
         
-        {/* شريط التنقل العصري - Glassmorphism Navbar */}
-        <nav className="sticky top-0 z-50 backdrop-blur-md bg-slate-900/70 border-b border-indigo-500/20 px-4 py-3 transition-all">
+        {/* شريط التنقل - Glassmorphism Navbar */}
+        <nav className="sticky top-0 z-50 backdrop-blur-md bg-slate-900/80 border-b border-indigo-500/20 px-4 py-3 transition-all">
           <div className="max-w-6xl mx-auto flex justify-between items-center">
             
-            {/* اللوجو والعنوان */}
             <Link href="/" className="flex items-center gap-2 group">
               <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center text-white shadow-lg group-hover:scale-105 transition-transform">
                 <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -63,7 +79,6 @@ export default function RootLayout({
               </span>
             </Link>
 
-            {/* أزرار الهيدر */}
             <div className="flex gap-2 items-center">
               <Link 
                 href="/" 
@@ -80,8 +95,8 @@ export default function RootLayout({
               </Link>
 
               {/* التحقق الصارم بعد اكتمال التحميل */}
-              {mounted && (
-                userName ? (
+              {isLoaded && (
+                user ? (
                   <div className="flex items-center gap-2">
                     <Link 
                       href="/profile" 
@@ -89,7 +104,7 @@ export default function RootLayout({
                     >
                       <span className="text-base">🎓</span>
                       <span className="text-xs font-bold text-cyan-400 truncate max-w-[80px]">
-                        {userName.split('@')[0]}
+                        {user.name}
                       </span>
                     </Link>
 
