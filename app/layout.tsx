@@ -13,13 +13,14 @@ export default function RootLayout({
         {/* شريط التنقل العصري - Glassmorphism Navbar */}
         <nav className="sticky top-0 z-50 backdrop-blur-md bg-slate-900/70 border-b border-indigo-500/20 px-6 py-4 transition-all">
           <div className="max-w-6xl mx-auto flex justify-between items-center">
-          <Link href="/" className="flex items-center gap-3 group">
-  <img src="/watermark.jpg" alt="شعار أكاديمية أثر" className="w-10 h-10 object-cover rounded-lg shadow-md group-hover:scale-105 transition-transform" />
+       <Link href="/" className="flex items-center gap-2 group">
+  <div className="w-9 h-9 rounded-lg bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center text-white font-black text-lg shadow-md group-hover:scale-105 transition-transform">
+    أ
+  </div>
   <span className="text-xl font-bold bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent">
     أكاديمية أثر
   </span>
-</Link> 
-
+</Link>
             <div className="flex gap-4 items-center">
               <Link 
                 href="/" 
