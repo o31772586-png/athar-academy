@@ -3,11 +3,22 @@ import Link from 'next/link';
 export default function Home() {
   return (
     <main className="min-h-screen pt-12 pb-24 px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center">
-      {/* القسم الرئيسي - شفاف وزجاجي لظهور العلامة المائية */}
-      <section className="w-full max-w-4xl mx-auto text-center p-8 sm:p-12 rounded-3xl bg-slate-900/40 backdrop-blur-md border border-indigo-500/20 shadow-2xl transition-all">
+      {/* القسم الرئيسي - شفاف وزجاجي لظهور العلامة المائية في خلفية الصفحة */}
+      <section className="w-full max-w-4xl mx-auto text-center p-8 sm:p-12 rounded-3xl bg-slate-900/60 backdrop-blur-md border border-indigo-500/30 shadow-2xl transition-all relative overflow-hidden">
         
+        {/* صورة الشعار داخل المستطيل */}
+        <div className="flex justify-center mb-6">
+          <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl overflow-hidden border-2 border-indigo-400/40 shadow-lg bg-white/10 p-1 flex items-center justify-center">
+            <img 
+              src="/watermark.jpg" 
+              alt="شعار أكاديمية أثر" 
+              className="w-full h-full object-cover rounded-xl"
+            />
+          </div>
+        </div>
+
         {/* شارة صغيرة فوق العنوان */}
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 text-sm font-medium mb-6">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 text-sm font-medium mb-4">
           <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
           انطلق نحو المستقبل
         </div>
