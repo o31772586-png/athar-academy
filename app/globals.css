@@ -1,10 +1,9 @@
 @import "tailwindcss";
 
-/* خلفية العلامة المائية لأكاديمية أثر تملأ الشاشة */
 body {
   position: relative;
   min-height: 100vh;
-  background-color: #0f172a; /* لون داكن أساسي يظهر تحته اللوجو */
+  background-color: #0f172a;
 }
 
 body::before {
@@ -17,13 +16,16 @@ body::before {
   background-image: url('/watermark.jpg');
   background-repeat: repeat;
   background-position: center;
-  background-size: 300px;
-  opacity: 0.18; /* واضحة وجميلة وفي الخلفية */
+  background-size: 280px;
+  
+  /* الشفافية ودمج الألوان عشان نخفي الخلفية البيضاء خالص */
+  opacity: 0.15;
+  mix-blend-mode: screen; /* بتخلي الألوان البيضاء تختفي تماماً وتندمج مع الخلفية الغامقة */
+  
   pointer-events: none;
   z-index: 0;
 }
 
-/* ضمان ظهور محتوى الصفحة فوق العلامة المائية */
 main, header, footer, div {
   position: relative;
   z-index: 1;
