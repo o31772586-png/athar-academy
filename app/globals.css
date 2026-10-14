@@ -1,9 +1,10 @@
 @import "tailwindcss";
 
-/* العلامة المائية لأكاديمية أثر */
+/* خلفية العلامة المائية لأكاديمية أثر تملأ الشاشة */
 body {
   position: relative;
   min-height: 100vh;
+  background-color: #0f172a; /* لون داكن أساسي يظهر تحته اللوجو */
 }
 
 body::before {
@@ -16,17 +17,14 @@ body::before {
   background-image: url('/watermark.jpg');
   background-repeat: repeat;
   background-position: center;
-  background-size: 220px;
-  
-  /* وضوح عالي للوجو */
-  opacity: 0.15; 
-  
-  /* دمج ذكي مع الألوان */
-  mix-blend-mode: multiply; 
-  
-  transform: rotate(-12deg);
-  
-  /* منع تفاعله مع الماوس وفي نفس الوقت إجباره يكون فوق الخلفيات */
+  background-size: 300px;
+  opacity: 0.18; /* واضحة وجميلة وفي الخلفية */
   pointer-events: none;
-  z-index: 9999; 
+  z-index: 0;
+}
+
+/* ضمان ظهور محتوى الصفحة فوق العلامة المائية */
+main, header, footer, div {
+  position: relative;
+  z-index: 1;
 }
