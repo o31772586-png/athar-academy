@@ -10,7 +10,7 @@ export default function Home() {
         {/* طبقة خلفية اللوجو التي تملأ المستطيل بالكامل */}
         <div 
           className="absolute inset-0 bg-cover bg-center z-0"
-          style={{ backgroundImage: "url('/watermark.jpg')" }}
+          style={{ backgroundImage: "url('/watermark.jpeg')" }}
         ></div>
 
         {/* طبقة تغميش شفافة فوق الصورة لضمان وضوح الكلام */}
