@@ -1,9 +1,10 @@
 @import "tailwindcss";
 
+/* خلفية العلامة المائية لأكاديمية أثر */
 body {
   position: relative;
   min-height: 100vh;
-  background-color: #0f172a;
+  background-color: #0b1329;
 }
 
 body::before {
@@ -16,17 +17,15 @@ body::before {
   background-image: url('/watermark.jpg');
   background-repeat: repeat;
   background-position: center;
-  background-size: 280px;
-  
-  /* الشفافية ودمج الألوان عشان نخفي الخلفية البيضاء خالص */
+  background-size: 240px;
   opacity: 0.15;
-  mix-blend-mode: screen; /* بتخلي الألوان البيضاء تختفي تماماً وتندمج مع الخلفية الغامقة */
-  
+  mix-blend-mode: screen;
   pointer-events: none;
   z-index: 0;
 }
 
-main, header, footer, div {
+/* تجعل حاويات الصفحة شبه شفافة لتسمح بمرور العلامة المائية */
+main, section, div {
   position: relative;
   z-index: 1;
 }
