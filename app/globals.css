@@ -14,7 +14,7 @@ body::before {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-image: url('/watermark.jpg');
+  background-image: url('/watermark.jpeg');
   background-repeat: repeat;
   background-position: center;
   background-size: 240px;
