@@ -1,11 +1,31 @@
+'use client';
 import './globals.css';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const [userEmail, setUserEmail] = useState<string | null>(null);
+
+  useEffect(() => {
+    // التحقق من وجود حساب مسجل في المتصفح
+    const savedEmail = localStorage.getItem('userEmail');
+    if (savedEmail) {
+      setUserEmail(savedEmail);
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('userEmail');
+    localStorage.removeItem('isAdmin');
+    localStorage.removeItem('userName');
+    setUserEmail(null);
+    window.location.href = '/login';
+  };
+
   return (
     <html lang="ar" dir="rtl">
       <body className="bg-linear-to-br from-slate-900 via-indigo-950 to-slate-900 text-slate-100 min-h-screen flex flex-col font-sans selection:bg-indigo-500 selection:text-white">
@@ -13,19 +33,20 @@ export default function RootLayout({
         {/* شريط التنقل العصري - Glassmorphism Navbar */}
         <nav className="sticky top-0 z-50 backdrop-blur-md bg-slate-900/70 border-b border-indigo-500/20 px-6 py-4 transition-all">
           <div className="max-w-6xl mx-auto flex justify-between items-center">
-     <Link href="/" className="flex items-center gap-2 group">
-  <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center text-white shadow-lg group-hover:scale-105 transition-transform">
-    {/* أيقونة طاقية التخرج */}
-    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M12 14l9-5-9-5-9 5 9 5z"></path>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M22 10v6M2 10v6"></path>
-    </svg>
-  </div>
-  <span className="text-xl font-bold bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent">
-    أكاديمية أثر
-  </span>
-</Link>
+            <Link href="/" className="flex items-center gap-2 group">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center text-white shadow-lg group-hover:scale-105 transition-transform">
+                {/* أيقونة طاقية التخرج */}
+                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 14l9-5-9-5-9 5 9 5z"></path>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M22 10v6M2 10v6"></path>
+                </svg>
+              </div>
+              <span className="text-xl font-bold bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent">
+                أكاديمية أثر
+              </span>
+            </Link>
+
             <div className="flex gap-4 items-center">
               <Link 
                 href="/" 
@@ -33,14 +54,30 @@ export default function RootLayout({
               >
                 الرئيسية
               </Link>
-              <Link 
-                href="/login" 
-                className="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium rounded-xl group bg-linear-to-br from-cyan-500 to-blue-600 group-hover:from-cyan-500 group-hover:to-blue-600 hover:text-white text-white shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 transition-all duration-300 active:scale-95"
-              >
-                <span className="relative px-5 py-2 transition-all ease-in duration-75 rounded-[10px] bg-opacity-0 font-bold">
-                  تسجيل الدخول ✨
-                </span>
-              </Link>
+
+              {/* تحكم ذكي في أزرار الهيدر */}
+              {userEmail ? (
+                <div className="flex items-center gap-3">
+                  <span className="text-sm font-semibold text-cyan-400 bg-cyan-950/50 border border-cyan-500/30 px-3 py-1.5 rounded-xl">
+                    👋 {userEmail.split('@')[0]}
+                  </span>
+                  <button 
+                    onClick={handleLogout}
+                    className="text-xs text-red-400 hover:text-red-300 bg-red-500/10 px-3 py-2 rounded-lg border border-red-500/20 transition"
+                  >
+                    خروج
+                  </button>
+                </div>
+              ) : (
+                <Link 
+                  href="/login" 
+                  className="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium rounded-xl group bg-linear-to-br from-cyan-500 to-blue-600 group-hover:from-cyan-500 group-hover:to-blue-600 hover:text-white text-white shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 transition-all duration-300 active:scale-95"
+                >
+                  <span className="relative px-5 py-2 transition-all ease-in duration-75 rounded-[10px] bg-opacity-0 font-bold">
+                    إنشاء حساب 🚀
+                  </span>
+                </Link>
+              )}
             </div>
           </div>
         </nav>
