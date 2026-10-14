@@ -2,7 +2,6 @@
 import './globals.css';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { usePathname } from 'next/navigation';
 
 export default function RootLayout({
   children,
@@ -10,26 +9,36 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const [userName, setUserName] = useState<string | null>(null);
-  const pathname = usePathname(); // لمتابعة التنقل بين الصفحات
 
-  const checkUserStatus = () => {
-    const name = localStorage.getItem('userName') || localStorage.getItem('userEmail');
-    if (name) {
-      setUserName(name);
-    } else {
-      setUserName(null);
-    }
+  // دالة لفحص المستخدم الحالي في التخزين المحلي
+  const updateAuthStatus = () => {
+    const userEmail = localStorage.getItem('userEmail');
+    const name = localStorage.getItem('userName') || userEmail;
+    setUserName(name);
   };
 
   useEffect(() => {
-    checkUserStatus();
+    updateAuthStatus();
+    // مراقبة التغييرات في الـ localStorage لتحديث الهيدر فوراً
+    window.addEventListener('storage', updateAuthStatus);
+    
+    // فحص دوري بسيط لضمان التحديث اللحظي عند التنقل
+    const interval = setInterval(updateAuthStatus, 500);
 
-    // الاستماع لأي تغيير في التخزين أو تنقل بين الصفحات لتحديث الهيدر فوراً
-    window.addEventListener('storage', checkUserStatus);
     return () => {
-      window.removeEventListener('storage', checkUserStatus);
+      window.removeEventListener('storage', updateAuthStatus);
+      clearInterval(interval);
     };
-  }, [pathname]);
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('currentUser');
+    localStorage.removeItem('userEmail');
+    localStorage.removeItem('userName');
+    localStorage.removeItem('isAdmin');
+    setUserName(null);
+    window.location.href = '/login';
+  };
 
   return (
     <html lang="ar" dir="rtl">
@@ -67,17 +76,26 @@ export default function RootLayout({
                 لوحة التحكم
               </Link>
 
-              {/* يختفي زر إنشاء حساب فور تسجيل الدخول ويحل محله الإيموجي والملف الشخصي */}
+              {/* الشرط الحاسم: لو مسجل يظهر الملف الشخصي وزرار الخروج، لو مش مسجل يظهر زر إنشاء حساب */}
               {userName ? (
-                <Link 
-                  href="/profile" 
-                  className="flex items-center gap-2 bg-slate-800/80 border border-cyan-500/30 hover:border-cyan-400 px-4 py-2 rounded-xl transition shadow-md group"
-                >
-                  <span className="text-lg group-hover:scale-110 transition-transform">🎓</span>
-                  <span className="text-sm font-bold text-cyan-400 truncate max-w-[120px]">
-                    {userName.split('@')[0]}
-                  </span>
-                </Link>
+                <div className="flex items-center gap-3">
+                  <Link 
+                    href="/profile" 
+                    className="flex items-center gap-2 bg-slate-800/80 border border-cyan-500/30 hover:border-cyan-400 px-4 py-2 rounded-xl transition shadow-md group"
+                  >
+                    <span className="text-lg group-hover:scale-110 transition-transform">🎓</span>
+                    <span className="text-sm font-bold text-cyan-400 truncate max-w-[100px]">
+                      {userName.split('@')[0]}
+                    </span>
+                  </Link>
+
+                  <button 
+                    onClick={handleLogout}
+                    className="px-3.5 py-2 bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/20 text-xs font-bold rounded-xl transition shadow-sm"
+                  >
+                    تسجيل خروج 🚪
+                  </button>
+                </div>
               ) : (
                 <Link 
                   href="/login" 
