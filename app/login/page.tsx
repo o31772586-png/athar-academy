@@ -5,17 +5,15 @@ import { useRouter } from 'next/navigation';
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
   const router = useRouter();
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (email === 'admin@athar.com' && password === '123456') {
-      // حفظ صلاحية الأدمن
+    if (email && password) {
+      // السماح بدخول أي إيميل وباسورد فوراً
       localStorage.setItem('isAdmin', 'true');
+      localStorage.setItem('userEmail', email);
       router.push('/dashboard');
-    } else {
-      setError('البريد الإلكتروني أو كلمة المرور غير صحيحة.');
     }
   };
 
@@ -28,12 +26,6 @@ export default function LoginPage() {
           <p className="text-slate-400 text-sm mt-1">أهلاً بك مجدداً في منصة أكاديمية أثر</p>
         </div>
 
-        {error && (
-          <div className="bg-red-500/10 text-red-400 p-4 rounded-xl text-sm mb-6 border border-red-500/20 text-center">
-            {error}
-          </div>
-        )}
-
         <form onSubmit={handleLogin} className="space-y-5">
           <div>
             <label className="block text-sm font-semibold text-slate-300 mb-2">البريد الإلكتروني</label>
@@ -42,7 +34,7 @@ export default function LoginPage() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="admin@athar.com"
+              placeholder="example@gmail.com"
               className="w-full px-4 py-3 bg-slate-950/60 border border-indigo-500/20 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 text-right transition"
             />
           </div>
@@ -54,14 +46,14 @@ export default function LoginPage() {
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="123456"
+              placeholder="••••••••"
               className="w-full px-4 py-3 bg-slate-950/60 border border-indigo-500/20 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 text-right transition"
             />
           </div>
 
           <button 
             type="submit" 
-            className="w-full py-3.5 bg-linear-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold rounded-xl shadow-lg shadow-cyan-500/20 transition duration-300 mt-2"
+            className="w-full py-3.5 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold rounded-xl shadow-lg shadow-cyan-500/20 transition duration-300 mt-2"
           >
             دخول للمنصة 🚀
           </button>
