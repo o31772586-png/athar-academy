@@ -8,23 +8,15 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const [userEmail, setUserEmail] = useState<string | null>(null);
+  const [userName, setUserName] = useState<string | null>(null);
 
   useEffect(() => {
-    // التحقق من وجود حساب مسجل في المتصفح
-    const savedEmail = localStorage.getItem('userEmail');
-    if (savedEmail) {
-      setUserEmail(savedEmail);
+    // جلب اسم المستخدم أو إيميله المسجل
+    const name = localStorage.getItem('userName') || localStorage.getItem('userEmail');
+    if (name) {
+      setUserName(name);
     }
   }, []);
-
-  const handleLogout = () => {
-    localStorage.removeItem('userEmail');
-    localStorage.removeItem('isAdmin');
-    localStorage.removeItem('userName');
-    setUserEmail(null);
-    window.location.href = '/login';
-  };
 
   return (
     <html lang="ar" dir="rtl">
@@ -35,7 +27,6 @@ export default function RootLayout({
           <div className="max-w-6xl mx-auto flex justify-between items-center">
             <Link href="/" className="flex items-center gap-2 group">
               <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center text-white shadow-lg group-hover:scale-105 transition-transform">
-                {/* أيقونة طاقية التخرج */}
                 <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 14l9-5-9-5-9 5 9 5z"></path>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path>
@@ -54,26 +45,31 @@ export default function RootLayout({
               >
                 الرئيسية
               </Link>
+              
+              <Link 
+                href="/dashboard" 
+                className="text-slate-300 hover:text-cyan-400 font-medium transition-colors px-3 py-2 rounded-lg hover:bg-slate-800/50"
+              >
+                لوحة التحكم
+              </Link>
 
-              {/* تحكم ذكي في أزرار الهيدر */}
-              {userEmail ? (
-                <div className="flex items-center gap-3">
-                  <span className="text-sm font-semibold text-cyan-400 bg-cyan-950/50 border border-cyan-500/30 px-3 py-1.5 rounded-xl">
-                    👋 {userEmail.split('@')[0]}
+              {/* تحكم ذكي: لو مسجل يظهر زر الملف الشخصي والإيموجي، لو مش مسجل يظهر زر إنشاء حساب */}
+              {userName ? (
+                <Link 
+                  href="/profile" 
+                  className="flex items-center gap-2 bg-slate-800/80 border border-cyan-500/30 hover:border-cyan-400 px-4 py-2 rounded-xl transition shadow-md"
+                >
+                  <span className="text-lg">🎓</span>
+                  <span className="text-sm font-bold text-cyan-400 truncate max-w-[120px]">
+                    {userName.split('@')[0]}
                   </span>
-                  <button 
-                    onClick={handleLogout}
-                    className="text-xs text-red-400 hover:text-red-300 bg-red-500/10 px-3 py-2 rounded-lg border border-red-500/20 transition"
-                  >
-                    خروج
-                  </button>
-                </div>
+                </Link>
               ) : (
                 <Link 
                   href="/login" 
-                  className="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium rounded-xl group bg-linear-to-br from-cyan-500 to-blue-600 group-hover:from-cyan-500 group-hover:to-blue-600 hover:text-white text-white shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 transition-all duration-300 active:scale-95"
+                  className="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium rounded-xl group bg-linear-to-br from-cyan-500 to-blue-600 hover:text-white text-white shadow-lg shadow-cyan-500/25 transition-all duration-300 active:scale-95"
                 >
-                  <span className="relative px-5 py-2 transition-all ease-in duration-75 rounded-[10px] bg-opacity-0 font-bold">
+                  <span className="relative px-5 py-2 rounded-[10px] font-bold">
                     إنشاء حساب 🚀
                   </span>
                 </Link>
@@ -87,7 +83,7 @@ export default function RootLayout({
           {children}
         </div>
 
-        {/* تذييل الصفحة الفخم - Footer */}
+        {/* التذييل */}
         <footer className="bg-slate-950/80 border-t border-indigo-500/10 py-8 px-6 text-center text-slate-400 text-sm mt-12 backdrop-blur-sm">
           <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="font-medium">جميع الحقوق محفوظة © 2026 - <span className="text-cyan-400 font-bold">أكاديمية أثر</span> 🚀</p>
