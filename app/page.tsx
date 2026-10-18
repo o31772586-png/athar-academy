@@ -6,7 +6,6 @@ export default function HomePage() {
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
-    // التحقق هل الحساب الحالي هو مدير المنصة الأدمن أم طالب
     const adminStatus = localStorage.getItem('isAdmin');
     if (adminStatus === 'true') {
       setIsAdmin(true);
@@ -14,6 +13,16 @@ export default function HomePage() {
   }, []);
 
   const courses = [
+    {
+      id: 'revolution-14',
+      title: 'كورس ريفلوشن - إبيسود 14 (Revolution Ep. 14)',
+      category: 'الإصدار الخاص والمتقدم ⚡',
+      price: '499 ج.م',
+      instructor: 'م. عمر عبد العزيز',
+      image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80',
+      description: 'الحلقة الاستثنائية والفريدة من نوعها، محتوى تقني ولغوي متطور يفتح لك آفاقاً جديدة بالكامل.',
+      level: 'متقدم وحصري'
+    },
     {
       id: 'eng-101',
       title: 'طلاقة اللغة الإنجليزية الشاملة (English Fluency)',
@@ -35,16 +44,6 @@ export default function HomePage() {
       level: 'جميع المستويات'
     },
     {
-      id: 'turk-101',
-      title: 'احتراف اللغة التركية للمحادثة والإتقان 🇹🇷',
-      category: 'اللغات الأجنبية 🇹🇷',
-      price: '279 ج.م',
-      instructor: 'أ. سارة محمود',
-      image: 'https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=800&q=80',
-      description: 'تعلم التركية اليومية، التعامل مع السكان المحليين، وقواعد النطق الصحيح بسهولة.',
-      level: 'مبتدئ - متوسط'
-    },
-    {
       id: 'cs-101',
       title: 'دبلومة البرمجة وتطوير المواقع الكاملة (Full-Stack)',
       category: 'التكنولوجيا والبرمجة 💻',
@@ -59,7 +58,7 @@ export default function HomePage() {
   return (
     <main className="min-h-screen bg-slate-950 text-slate-100 dir-rtl overflow-x-hidden selection:bg-cyan-500 selection:text-black">
       
-      {/* 1. Hero Section - الواجهة الرئيسية */}
+      {/* Hero Section */}
       <section className="relative py-20 md:py-32 px-6 overflow-hidden border-b border-indigo-500/10">
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-cyan-500/20 to-indigo-600/20 rounded-full blur-[120px] pointer-events-none"></div>
 
@@ -103,35 +102,15 @@ export default function HomePage() {
               </Link>
             )}
           </div>
-
-          {/* إحصائيات المنصة */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 pt-12 border-t border-slate-800/80">
-            <div>
-              <div className="text-3xl md:text-4xl font-black text-cyan-400">+10,000</div>
-              <div className="text-xs md:text-sm text-slate-400 mt-1">طالب مشترك</div>
-            </div>
-            <div>
-              <div className="text-3xl md:text-4xl font-black text-blue-400">98%</div>
-              <div className="text-xs md:text-sm text-slate-400 mt-1">نسبة رضا الطلاب</div>
-            </div>
-            <div>
-              <div className="text-3xl md:text-4xl font-black text-indigo-400">+150</div>
-              <div className="text-xs md:text-sm text-slate-400 mt-1">ساعة تدريبية حية</div>
-            </div>
-            <div>
-              <div className="text-3xl md:text-4xl font-black text-emerald-400">24/7</div>
-              <div className="text-xs md:text-sm text-slate-400 mt-1">دعم فني وتطبيقي</div>
-            </div>
-          </div>
         </div>
       </section>
 
-      {/* 2. معرض الكورسات المتاحة */}
+      {/* معرض الكورسات */}
       <section id="courses" className="py-20 px-6 max-w-6xl mx-auto">
         <div className="text-center mb-16">
-          <span className="text-cyan-400 font-bold text-sm block mb-2">📚 الكورسات المتاحة حالياً</span>
+          <span className="text-cyan-400 font-bold text-sm block mb-2">📚 الإصدارات والكورسات المتاحة</span>
           <h2 className="text-3xl md:text-5xl font-black text-white mb-4">اختر كورس وباشر رحلتك فوراً 🚀</h2>
-          <p className="text-slate-400 text-sm max-w-xl mx-auto">تصفح البوسترات الرسمية للكورسات واشترك بضغطة زر واحدة.</p>
+          <p className="text-slate-400 text-sm max-w-xl mx-auto">تصفح الكورسات الحصرية وانضم لإصدار ريفلوشن الجديد.</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -140,7 +119,6 @@ export default function HomePage() {
               key={course.id} 
               className="bg-slate-900/80 border border-indigo-500/20 rounded-3xl overflow-hidden shadow-2xl hover:border-cyan-500/50 transition duration-300 flex flex-col group"
             >
-              {/* صورة الغلاف */}
               <div className="relative h-56 overflow-hidden">
                 <img 
                   src={course.image} 
@@ -155,7 +133,6 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* التفاصيل */}
               <div className="p-6 flex flex-col grow">
                 <h3 className="text-xl font-bold text-white mb-2 group-hover:text-cyan-400 transition">
                   {course.title}
@@ -175,13 +152,12 @@ export default function HomePage() {
                   </div>
                 </div>
 
-                {/* التميز الذكي: الأدمن يظهر له فتح مباشر، بينما الطالب يظهر له زرار الشراء */}
                 {isAdmin ? (
                   <Link 
                     href={`/course/${course.id}`}
                     className="mt-6 w-full py-3.5 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 font-bold rounded-xl text-center text-sm transition flex items-center justify-center gap-2"
                   >
-                    <span>معاينة وفتح المحاضرة مباشرة 👁️👑</span>
+                    <span>معاينة وفتح الكورس مباشرة 👁️👑</span>
                   </Link>
                 ) : (
                   <Link 
@@ -191,7 +167,6 @@ export default function HomePage() {
                     اشترك الآن في الكورس ⚡
                   </Link>
                 )}
-
               </div>
             </div>
           ))}
