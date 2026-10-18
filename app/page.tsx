@@ -21,7 +21,8 @@ export default function HomePage() {
       instructor: 'م. عمر عبد العزيز',
       image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80',
       description: 'الحلقة الاستثنائية والفريدة من نوعها، محتوى تقني ولغوي متطور يفتح لك آفاقاً جديدة بالكامل.',
-      level: 'متقدم وحصري'
+      level: 'متقدم وحصري',
+      link: '/revolution'
     },
     {
       id: 'eng-101',
@@ -31,7 +32,8 @@ export default function HomePage() {
       instructor: 'م. عمر عبد العزيز',
       image: 'https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=800&q=80',
       description: 'اتقن المحادثة والصوتيات من الصفر وتحدث بثقة بدون خوف مع تدريبات تفاعلية حية.',
-      level: 'من المبتدئ للمتقدم'
+      level: 'من المبتدئ للمتقدم',
+      link: '/checkout'
     },
     {
       id: 'ger-101',
@@ -41,7 +43,8 @@ export default function HomePage() {
       instructor: 'د. أحمد حسن',
       image: 'https://images.unsplash.com/photo-1527866512907-a35a62a7f6be?auto=format&fit=crop&w=800&q=80',
       description: 'طريقك المباشر للسفر والدراسة في ألمانيا، تغطية كاملة للقواعد وامتحانات Goethe.',
-      level: 'جميع المستويات'
+      level: 'جميع المستويات',
+      link: '/checkout'
     },
     {
       id: 'cs-101',
@@ -51,7 +54,8 @@ export default function HomePage() {
       instructor: 'م. عمر عبد العزيز',
       image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80',
       description: 'تعلم JavaScript, React, Next.js وبناء مشاريع واقعية حقيقية تؤهلك لسوق العمل.',
-      level: 'احترافي'
+      level: 'احترافي',
+      link: '/checkout'
     }
   ];
 
@@ -154,17 +158,17 @@ export default function HomePage() {
 
                 {isAdmin ? (
                   <Link 
-                    href={`/course/${course.id}`}
+                    href={course.link}
                     className="mt-6 w-full py-3.5 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 font-bold rounded-xl text-center text-sm transition flex items-center justify-center gap-2"
                   >
                     <span>معاينة وفتح الكورس مباشرة 👁️👑</span>
                   </Link>
                 ) : (
                   <Link 
-                    href="/checkout" 
+                    href={course.link === '/revolution' ? '/revolution' : '/checkout'} 
                     className="mt-6 w-full py-3.5 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-black rounded-xl text-center text-sm shadow-md transition"
                   >
-                    اشترك الآن في الكورس ⚡
+                    {course.link === '/revolution' ? 'مشاهدة الكورس الحصري ⚡' : 'اشترك الآن في الكورس ⚡'}
                   </Link>
                 )}
               </div>
