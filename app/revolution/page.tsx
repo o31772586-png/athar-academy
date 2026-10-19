@@ -23,7 +23,7 @@ export default function RevolutionCoursePage() {
         <div className="lg:col-span-2 space-y-4">
           <div className="relative w-full aspect-video bg-slate-950 rounded-3xl overflow-hidden border border-indigo-500/20 shadow-2xl flex items-center justify-center">
             {mediaType === 'video' ? (
-              // مشغل الفيديو المباشر من سيرفر المنصة بالاسم الجديد
+              // مشغل الفيديو المباشر من سيرفر المنصة
               <video 
                 controls 
                 className="w-full h-full object-contain"
