@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-slate-950 text-white dir-rtl selection:bg-cyan-500 selection:text-black">
+    <main className="min-h-screen bg-slate-950 text-white dir-rtl selection:bg-cyan-500 selection: text-black">
       
       {/* 1. قسم البداية والترحيب العريض */}
       <section className="relative overflow-hidden py-20 px-4 border-b border-indigo-500/10">
