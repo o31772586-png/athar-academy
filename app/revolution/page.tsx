@@ -2,7 +2,6 @@
 import { useState, useRef } from 'react';
 import Link from 'next/link';
 
-// توقيتات المشهد (8 ثواني)
 const transcriptData = [
   {
     start: 0.0,
@@ -58,31 +57,18 @@ export default function RevolutionCoursePage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* مشغل الوسائط */}
         <div className="lg:col-span-2 space-y-4">
-          <div className="relative w-full aspect-video bg-black rounded-3xl overflow-hidden border border-indigo-500/20 shadow-2xl flex items-center justify-center">
+          <div className="relative w-full aspect-video bg-slate-950 rounded-3xl overflow-hidden border border-indigo-500/20 shadow-2xl flex items-center justify-center">
             {mediaType === 'video' ? (
-              <div className="relative w-full h-full flex items-center justify-center">
-                <video 
-                  ref={videoRef}
-                  controls 
-                  onTimeUpdate={handleTimeUpdate}
-                  className="w-full h-full object-contain"
-                  preload="metadata"
-                >
-                  <source src="/friends-scene.mp4" type="video/mp4" />
-                  <track src="/subtitles.vtt" kind="subtitles" srcLang="ar" label="العربية" default />
-                  متصفحك لا يدعم تشغيل الفيديو.
-                </video>
-
-                {/* الترجمة السينمائية في أسفل الشاشة تماماً */}
-                <div className="absolute bottom-3 inset-x-0 pointer-events-none flex flex-col items-center justify-center px-4 text-center z-20 space-y-0.5">
-                  <p className="bg-black/80 text-yellow-300 text-xs md:text-sm font-bold px-3 py-0.5 rounded shadow-lg font-sans tracking-wide">
-                    {currentSubtitle.en}
-                  </p>
-                  <p className="bg-black/80 text-white text-xs md:text-sm font-semibold px-3 py-0.5 rounded shadow-lg font-sans dir-rtl">
-                    {currentSubtitle.ar}
-                  </p>
-                </div>
-              </div>
+              <video 
+                ref={videoRef}
+                controls 
+                onTimeUpdate={handleTimeUpdate}
+                className="w-full h-full object-contain"
+                preload="metadata"
+              >
+                <source src="/friends-scene.mp4" type="video/mp4" />
+                متصفحك لا يدعم تشغيل الفيديو.
+              </video>
             ) : (
               <iframe 
                 src="https://www.youtube.com/embed/WKAntgNZPFs?cc_load_policy=1&hl=ar"
@@ -93,26 +79,32 @@ export default function RevolutionCoursePage() {
             )}
           </div>
 
-          {/* صندوق معلومات إضافية والتحليل القديم */}
-          <div className="bg-slate-900/80 border border-cyan-500/30 p-6 rounded-2xl space-y-4 shadow-xl">
+          {/* صندوق الترجمة الفورية البارز (تحت الفيديو مباشرة وبتتغير مع حركة الكلام) */}
+          <div className="bg-slate-900/90 border border-cyan-500/40 p-6 rounded-2xl space-y-3 shadow-2xl">
             <div className="flex items-center justify-between">
-              <h4 className="text-sm font-bold text-white flex items-center gap-2">
-                <span>🤖</span>
-                <span>التحليل والتكرار التفاعلي (Listen & Repeat)</span>
+              <h4 className="text-xs font-bold text-cyan-300 flex items-center gap-2">
+                <span>💬</span>
+                <span>الترجمة الحية التفاعلية (Listen & Repeat)</span>
               </h4>
-              <span className="text-xs text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-full font-bold animate-pulse">🟢 متزامن مع الفيديو</span>
+              <span className="text-[10px] text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 rounded-full font-bold animate-pulse">● متزامن مع الصوت</span>
             </div>
-            <p className="text-[12px] text-slate-300">
-              استمع للمشهد وتابع الترجمة السينمائية أسفل الفيديو مباشرة، ويمكنك الضغط على أي جملة في القائمة الجانبية لإعادة التدريب عليها فوراً.
-            </p>
+
+            <div className="bg-slate-950 p-4 rounded-xl border border-indigo-500/20 space-y-2">
+              <p className="text-yellow-300 font-mono text-sm md:text-base font-bold">
+                🇺🇸 {currentSubtitle.en}
+              </p>
+              <p className="text-white text-sm md:text-base font-semibold pt-1 border-t border-slate-800/80">
+                🇪🇬 {currentSubtitle.ar}
+              </p>
+            </div>
           </div>
         </div>
 
-        {/* لوحة سكربت الحوار والمصادر القديمة بالكامل */}
+        {/* لوحة سكربت الحوار والمصادر الجانبية */}
         <div className="bg-slate-900/80 border border-indigo-500/20 p-6 rounded-3xl h-fit space-y-4">
           <h2 className="text-lg font-bold text-white flex items-center gap-2">
             <span>📜</span>
-            <span>سكربت المشهد (اضغط للتدريب)</span>
+            <span>سكربت المشهد (اضغط للتكرار)</span>
           </h2>
 
           <div className="space-y-3 max-h-[280px] overflow-y-auto pl-1">
@@ -128,7 +120,7 @@ export default function RevolutionCoursePage() {
               >
                 <div className="flex justify-between items-center w-full">
                   <span className="font-mono text-[10px] text-cyan-300">[{item.start}s - {item.end}s]</span>
-                  <span className="text-[10px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded">كرر 🔄</span>
+                  <span className="text-[10px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded">إعادة 🔄</span>
                 </div>
                 <p className="font-medium">{item.en}</p>
               </button>
