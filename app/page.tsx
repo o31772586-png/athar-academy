@@ -1,182 +1,30 @@
 'use client';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
 
-export default function HomePage() {
-  const [isAdmin, setIsAdmin] = useState(false);
-
-  useEffect(() => {
-    const adminStatus = localStorage.getItem('isAdmin');
-    if (adminStatus === 'true') {
-      setIsAdmin(true);
-    }
-  }, []);
-
-  const courses = [
-    {
-      id: 'revolution-14',
-      title: 'كورس ريفلوشن - إبيسود 14 (Revolution Ep. 14)',
-      category: 'الإصدار الخاص والمتقدم ⚡',
-      price: '499 ج.م',
-      instructor: 'م. عمر عبد العزيز',
-      image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80',
-      description: 'الحلقة الاستثنائية والفريدة من نوعها، محتوى تقني ولغوي متطور يفتح لك آفاقاً جديدة بالكامل.',
-      level: 'متقدم وحصري',
-      link: '/revolution'
-    },
-    {
-      id: 'eng-101',
-      title: 'طلاقة اللغة الإنجليزية الشاملة (English Fluency)',
-      category: 'اللغات الأجنبية 🇬🇧',
-      price: '299 ج.م',
-      instructor: 'م. عمر عبد العزيز',
-      image: 'https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=800&q=80',
-      description: 'اتقن المحادثة والصوتيات من الصفر وتحدث بثقة بدون خوف مع تدريبات تفاعلية حية.',
-      level: 'من المبتدئ للمتقدم',
-      link: '/checkout'
-    },
-    {
-      id: 'ger-101',
-      title: 'كورس اللغة الألمانية الشامل (Deutsch A1-B2)',
-      category: 'اللغات الأجنبية 🇩🇪',
-      price: '349 ج.م',
-      instructor: 'د. أحمد حسن',
-      image: 'https://images.unsplash.com/photo-1527866512907-a35a62a7f6be?auto=format&fit=crop&w=800&q=80',
-      description: 'طريقك المباشر للسفر والدراسة في ألمانيا، تغطية كاملة للقواعد وامتحانات Goethe.',
-      level: 'جميع المستويات',
-      link: '/checkout'
-    },
-    {
-      id: 'cs-101',
-      title: 'دبلومة البرمجة وتطوير المواقع الكاملة (Full-Stack)',
-      category: 'التكنولوجيا والبرمجة 💻',
-      price: '399 ج.م',
-      instructor: 'م. عمر عبد العزيز',
-      image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80',
-      description: 'تعلم JavaScript, React, Next.js وبناء مشاريع واقعية حقيقية تؤهلك لسوق العمل.',
-      level: 'احترافي',
-      link: '/checkout'
-    }
-  ];
-
+export default function Home() {
   return (
-    <main className="min-h-screen bg-slate-950 text-slate-100 dir-rtl overflow-x-hidden selection:bg-cyan-500 selection:text-black">
-      
-      {/* Hero Section */}
-      <section className="relative py-20 md:py-32 px-6 overflow-hidden border-b border-indigo-500/10">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-cyan-500/20 to-indigo-600/20 rounded-full blur-[120px] pointer-events-none"></div>
-
-        <div className="max-w-6xl mx-auto text-center relative z-10">
-          <span className="inline-block bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 px-4 py-1.5 rounded-full text-xs md:text-sm font-bold mb-6 backdrop-blur-md">
-            🚀 المنصة التعليمية الرائدة للغات والبرمجة 2026
-          </span>
-
-          <h1 className="text-4xl md:text-7xl font-black text-white leading-tight mb-6">
-            ارتقِ بمهاراتك مع <br />
-            <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent">
-              أكاديمية أثر التعليمية
-            </span>
+    <main className="min-h-screen bg-slate-950 text-white dir-rtl selection:bg-cyan-500 selection:text-black">
+      {/* قسم الترحيب الرئيسي والهوية البصرية لأكاديمية أثر */}
+      <section className="relative overflow-hidden py-20 px-4 border-b border-indigo-500/10">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.15),rgba(255,255,255,0))]"></div>
+        <div className="max-w-5xl mx-auto text-center relative z-10 space-y-6">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-400/20 text-cyan-300 text-xs font-bold shadow-lg">
+            <span>✨</span>
+            <span>الجيل الجديد من منصات تعلم اللغات وتطوير الذات</span>
+          </div>
+          
+          <h1 className="text-4xl md:text-6xl font-black tracking-tight leading-tight">
+            مرحباً بك في <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-indigo-400">أكاديمية أثر</span> 🚀
           </h1>
-
-          <p className="text-slate-400 text-base md:text-xl max-w-3xl mx-auto leading-relaxed mb-10">
-            محتوى تعليمي نادر ومصمم بأعلى جودة لمساعدتك على إتقان اللغات الأجنبية والبرمجة مع تطبيق عملي ومتابعة شخصية مستمرة خطوة بخطوة.
+          
+          <p className="text-slate-300 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
+            حيث الإتقان الحقيقي والتجربة التفاعلية المبتكرة! نحن لسنا مجرد منصة كورسات عادية، بل بيئة متكاملة مصممة خصيصاً لتصنع فرقاً حقيقياً في مهاراتك وثقتك بنفسك. كورساتنا لا مثيل لها لأنها تبنيك خطوة بخطوة بطريقة تفاعلية ممتعة.
           </p>
 
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
-            <Link 
+          <div className="flex flex-wrap justify-center gap-4 pt-4">
+            <a 
               href="#courses" 
-              className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-black rounded-2xl shadow-xl shadow-cyan-500/20 transition-all duration-300 text-base"
-            >
-              استكشف الكورسات المتاحة 📚
-            </Link>
-            
-            {isAdmin ? (
-              <Link 
-                href="/admin" 
-                className="w-full sm:w-auto px-8 py-4 bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/40 text-emerald-300 font-bold rounded-2xl transition duration-300 text-base flex items-center justify-center gap-2"
-              >
-                <span>👑 لوحة التحكم المالية والمدير</span>
-              </Link>
-            ) : (
-              <Link 
-                href="/login" 
-                className="w-full sm:w-auto px-8 py-4 bg-slate-900/80 hover:bg-slate-800 border border-indigo-500/30 text-white font-bold rounded-2xl transition duration-300 text-base"
-              >
-                انشئ حسابك الآن 🚀
-              </Link>
-            )}
-          </div>
-        </div>
-      </section>
-
-      {/* معرض الكورسات */}
-      <section id="courses" className="py-20 px-6 max-w-6xl mx-auto">
-        <div className="text-center mb-16">
-          <span className="text-cyan-400 font-bold text-sm block mb-2">📚 الإصدارات والكورسات المتاحة</span>
-          <h2 className="text-3xl md:text-5xl font-black text-white mb-4">اختر كورس وباشر رحلتك فوراً 🚀</h2>
-          <p className="text-slate-400 text-sm max-w-xl mx-auto">تصفح الكورسات الحصرية وانضم لإصدار ريفلوشن الجديد.</p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {courses.map((course) => (
-            <div 
-              key={course.id} 
-              className="bg-slate-900/80 border border-indigo-500/20 rounded-3xl overflow-hidden shadow-2xl hover:border-cyan-500/50 transition duration-300 flex flex-col group"
-            >
-              <div className="relative h-56 overflow-hidden">
-                <img 
-                  src={course.image} 
-                  alt={course.title} 
-                  className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
-                />
-                <div className="absolute top-4 right-4 bg-slate-950/80 backdrop-blur-md px-3 py-1 rounded-xl text-xs font-bold text-cyan-400 border border-cyan-500/30">
-                  {course.category}
-                </div>
-                <div className="absolute bottom-4 left-4 bg-slate-950/90 backdrop-blur-md px-3 py-1.5 rounded-xl text-xs font-bold text-slate-300">
-                  {course.level}
-                </div>
-              </div>
-
-              <div className="p-6 flex flex-col grow">
-                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-cyan-400 transition">
-                  {course.title}
-                </h3>
-                <p className="text-slate-400 text-xs leading-relaxed mb-4 grow">
-                  {course.description}
-                </p>
-
-                <div className="flex justify-between items-center pt-4 border-t border-slate-800">
-                  <div>
-                    <span className="text-[10px] text-slate-500 block">المحاضر</span>
-                    <span className="text-xs font-bold text-slate-300">{course.instructor}</span>
-                  </div>
-                  <div className="text-left">
-                    <span className="text-[10px] text-slate-500 block">الاستثمار</span>
-                    <span className="text-lg font-black text-cyan-400">{course.price}</span>
-                  </div>
-                </div>
-
-                {isAdmin ? (
-                  <Link 
-                    href={course.link}
-                    className="mt-6 w-full py-3.5 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 font-bold rounded-xl text-center text-sm transition flex items-center justify-center gap-2"
-                  >
-                    <span>معاينة وفتح الكورس مباشرة 👁️👑</span>
-                  </Link>
-                ) : (
-                  <Link 
-                    href={course.link === '/revolution' ? '/revolution' : '/checkout'} 
-                    className="mt-6 w-full py-3.5 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-black rounded-xl text-center text-sm shadow-md transition"
-                  >
-                    {course.link === '/revolution' ? 'مشاهدة الكورس الحصري ⚡' : 'اشترك الآن في الكورس ⚡'}
-                  </Link>
-                )}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
+              className="bg-gradient-to-r from-cyan-5
     </main>
   );
 }
