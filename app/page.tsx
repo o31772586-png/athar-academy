@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-slate-950 text-white dir-rtl selection:bg-cyan-500 selection: text-black">
+    <main className="min-h-screen bg-slate-950 text-white dir-rtl selection:bg-cyan-500 selection:text-black">
       
       {/* 1. قسم البداية والترحيب العريض */}
       <section className="relative overflow-hidden py-20 px-4 border-b border-indigo-500/10">
@@ -34,7 +34,7 @@ export default function Home() {
               className="bg-slate-900 border border-indigo-500/30 hover:border-cyan-400/50 text-slate-200 font-bold px-8 py-4 rounded-2xl transition text-sm md:text-base flex items-center gap-2"
             >
               <span>🎧 تجربة ورشة Friends الحية</span>
-              <span className="text-cyan-400">←</span>
+              <span className="text-cyan-400">&larr;</span>
             </Link>
           </div>
         </div>
@@ -66,7 +66,7 @@ export default function Home() {
             <div className="text-3xl">⚡</div>
             <h3 className="text-lg font-bold text-white">أدوات تفاعلية متطورة</h3>
             <p className="text-slate-400 text-xs md:text-sm leading-relaxed">
-              أنظمة Listen & Repeat والترجمة المتزامنة المدمجة لضمان إتقان النطق ومتابعة تقدمك ثانية بثانية.
+              أنظمة Listen &amp; Repeat والترجمة المتزامنة المدمجة لضمان إتقان النطق ومتابعة تقدمك ثانية بثانية.
             </p>
           </div>
 
@@ -92,139 +92,3 @@ export default function Home() {
             اختر لغتك أو مسارك وابدأ رحلتك فوراً
           </h2>
           <p className="text-slate-400 text-xs md:text-sm max-w-2xl mx-auto">
-            تصفح الأقسام والبرامج المتاحة والمستقبلية بالتفصيل، واكتشف ما ستتعلمه في كل مسار.
-          </p>
-        </div>
-
-        <div className="space-y-12">
-
-          {/* 1. اللغة الإنجليزية */}
-          <div className="bg-slate-900/80 border border-cyan-500/30 rounded-3xl p-8 md:p-10 space-y-6 shadow-2xl relative overflow-hidden">
-            <div className="flex flex-wrap justify-between items-center gap-4">
-              <div className="flex items-center gap-3">
-                <span className="text-3xl">🇺🇸</span>
-                <div>
-                  <span className="text-cyan-400 text-xs font-bold block">مسار المحادثة والطلاقة</span>
-                  <h3 className="text-2xl md:text-3xl font-black text-white">كورس ريفلوشن - ورشة محادثات Friends الحية</h3>
-                </div>
-              </div>
-              <span className="text-xs text-emerald-400 font-bold bg-emerald-500/10 border border-emerald-500/20 px-4 py-1.5 rounded-full">
-                🟢 متاح الآن للتعلم المباشر
-              </span>
-            </div>
-
-            <p className="text-slate-300 text-sm md:text-base leading-relaxed">
-              هذا ليس كورساً عادياً للقواعد، بل ورشة عمل سينمائية تعتمد على تحليل مقاطع ومشاهد حقيقية من المسلسل الشهير Friends. ستتعلم التعبيرات الدارجة، كيفية نطق الكلمات كالمتحدث الأصلي، مع نظام تكرار تفاعلي وترجمة سريعة متزامنة ثانية بثانية لتكسر حاجز الخوف وتتحدث بطلاقة.
-            </p>
-
-            <div className="pt-4 border-t border-slate-800 flex flex-wrap justify-between items-center gap-4">
-              <div className="text-xs text-slate-400 flex items-center gap-4">
-                <span>⏱️ مشغل تفاعلي خاص</span>
-                <span>🎧 نظام Listen & Repeat</span>
-                <span>💬 ترجمة متزامنة</span>
-              </div>
-              <Link 
-                href="/revolution" 
-                className="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black px-6 py-3 rounded-2xl text-xs md:text-sm transition shadow-lg"
-              >
-                دخول الكورس والتجربة المباشرة ↩️
-              </Link>
-            </div>
-          </div>
-
-          {/* 2. اللغة الألمانية */}
-          <div className="bg-slate-900/60 border border-indigo-500/20 rounded-3xl p-8 md:p-10 space-y-6 shadow-xl">
-            <div className="flex flex-wrap justify-between items-center gap-4">
-              <div className="flex items-center gap-3">
-                <span className="text-3xl">🇩🇪</span>
-                <div>
-                  <span className="text-yellow-400 text-xs font-bold block">مسار اللغة الألمانية</span>
-                  <h3 className="text-2xl md:text-3xl font-black text-white">كورس الألمانية الشامل (Deutsch Masterclass)</h3>
-                </div>
-              </div>
-              <span className="text-xs text-amber-300 font-bold bg-amber-500/10 border border-amber-500/20 px-4 py-1.5 rounded-full">
-                ⏳ قريباً في الأكاديمية
-              </span>
-            </div>
-
-            <p className="text-slate-300 text-sm md:text-base leading-relaxed">
-              دليلك الكامل لإتقان اللغة الألمانية من مستويات A1 حتى المستويات المتقدمة. يركز الكورس على تفكيك عقدة القواعد الألمانية الصعبة، وتبسيط تركيب الجمل، مع التدريب على محادثات السفر، العمل، والدراسة في ألمانيا بلغة نقية ومبسطة.
-            </p>
-
-            <div className="pt-4 border-t border-slate-800/80 flex items-center justify-between">
-              <span className="text-xs text-slate-400">يشمل: القواعد، المحادثة، واختبارات الممارسة</span>
-              <button disabled className="bg-slate-800 text-slate-500 font-bold px-6 py-3 rounded-2xl text-xs cursor-not-allowed">
-                انتظروا الإطلاق ⏳
-              </button>
-            </div>
-          </div>
-
-          {/* 3. اللغة التركية */}
-          <div className="bg-slate-900/60 border border-indigo-500/20 rounded-3xl p-8 md:p-10 space-y-6 shadow-xl">
-            <div className="flex flex-wrap justify-between items-center gap-4">
-              <div className="flex items-center gap-3">
-                <span className="text-3xl">🇹🇷</span>
-                <div>
-                  <span className="text-red-400 text-xs font-bold block">مسار اللغة التركية</span>
-                  <h3 className="text-2xl md:text-3xl font-black text-white">كورس طلاقة اللغة التركية والمحادثات اليومية</h3>
-                </div>
-              </div>
-              <span className="text-xs text-amber-300 font-bold bg-amber-500/10 border border-amber-500/20 px-4 py-1.5 rounded-full">
-                ⏳ قريباً في الأكاديمية
-              </span>
-            </div>
-
-            <p className="text-slate-300 text-sm md:text-base leading-relaxed">
-              تعلم اللغة التركية بطريقة ممتعة وسلسة بعيداً عن الجفاف! ستتعلم أشهر التعبيرات والتشبيهات المستعملة في الشارع التركي والمسلسلات، مع شرح مبسط لقواعد التوافق الصوتي وتركيب الجمل لتعبر عن نفسك بكل ثقة وبدون تردد.
-            </p>
-
-            <div className="pt-4 border-t border-slate-800/80 flex items-center justify-between">
-              <span className="text-xs text-slate-400">يشمل: تعبيرات الشارع، الدراما، والتركيبات الأساسية</span>
-              <button disabled className="bg-slate-800 text-slate-500 font-bold px-6 py-3 rounded-2xl text-xs cursor-not-allowed">
-                انتظروا الإطلاق ⏳
-              </button>
-            </div>
-          </div>
-
-          {/* 4. البرمجة والذكاء الاصطناعي */}
-          <div className="bg-slate-900/60 border border-indigo-500/20 rounded-3xl p-8 md:p-10 space-y-6 shadow-xl">
-            <div className="flex flex-wrap justify-between items-center gap-4">
-              <div className="flex items-center gap-3">
-                <span className="text-3xl">💻</span>
-                <div>
-                  <span className="text-purple-400 text-xs font-bold block">مسار التكنولوجيا والتقنية</span>
-                  <h3 className="text-2xl md:text-3xl font-black text-white">دبلومة البرمجة وتطوير البرمجيات والذكاء الاصطناعي</h3>
-                </div>
-              </div>
-              <span className="text-xs text-amber-300 font-bold bg-amber-500/10 border border-amber-500/20 px-4 py-1.5 rounded-full">
-                ⏳ قريباً في الأكاديمية
-              </span>
-            </div>
-
-            <p className="text-slate-300 text-sm md:text-base leading-relaxed">
-              انطلاقتك الحقيقية في عالم التكنولوجيا! تعلم أساسيات البرمجة والتفكير المنطقي، البرمجة كائنية التوجه (OOP)، كيفية إنشاء المواقع والتطبيقات، واستغلال أدوات الذكاء الاصطناعي لتبني مشاريع قوية وتجهز نفسك لسوق العمل العالمي.
-            </p>
-
-            <div className="pt-4 border-t border-slate-800/80 flex items-center justify-between">
-              <span className="text-xs text-slate-400">يشمل: التفكير المنطقي، بناء المشاريع، والذكاء الاصطناعي</span>
-              <button disabled className="bg-slate-800 text-slate-500 font-bold px-6 py-3 rounded-2xl text-xs cursor-not-allowed">
-                انتظروا الإطلاق ⏳
-              </button>
-            </div>
-          </div>
-
-        </div>
-
-      </section>
-
-      {/* 4. ذيل الصفحة الختامي */}
-      <footer className="py-12 text-center text-xs text-slate-500 border-t border-indigo-500/10 bg-slate-950">
-        <div className="max-w-4xl mx-auto space-y-3 px-4">
-          <p className="text-slate-400 font-bold text-sm">أكاديمية أثر — نحو تجربة تعليمية فريدة ولا تُنسى ✨</p>
-          <p>جميع الحقوق محفوظة © 2026</p>
-        </div>
-      </footer>
-
-    </main>
-  );
-}
