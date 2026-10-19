@@ -2,7 +2,7 @@
 import { useState, useRef } from 'react';
 import Link from 'next/link';
 
-// توقيتات المشهد (8 ثواني) مقسمة على الجمل
+// توقيتات المشهد (8 ثواني)
 const transcriptData = [
   {
     start: 0.0,
@@ -23,7 +23,6 @@ export default function RevolutionCoursePage() {
   const [currentSubtitle, setCurrentSubtitle] = useState(transcriptData[0]);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  // تحديث النص لحظياً مع حركة ثواني الفيديو
   const handleTimeUpdate = () => {
     if (videoRef.current) {
       const currentTime = videoRef.current.currentTime;
@@ -50,11 +49,11 @@ export default function RevolutionCoursePage() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* مشغل الوسائط مع شريط الترجمة الظاهر داخل الفيديو */}
+        {/* مشغل الوسائط */}
         <div className="lg:col-span-2 space-y-4">
-          <div className="relative w-full aspect-video bg-slate-950 rounded-3xl overflow-hidden border border-indigo-500/20 shadow-2xl flex items-center justify-center group">
+          <div className="relative w-full aspect-video bg-black rounded-3xl overflow-hidden border border-indigo-500/20 shadow-2xl flex items-center justify-center">
             {mediaType === 'video' ? (
-              <>
+              <div className="relative w-full h-full flex items-center justify-center">
                 <video 
                   ref={videoRef}
                   controls 
@@ -67,16 +66,16 @@ export default function RevolutionCoursePage() {
                   متصفحك لا يدعم تشغيل الفيديو.
                 </video>
 
-                {/* شريط الترجمة الظاهر أسفل الشاشة داخل الفيديو مباشرة كالأفلام */}
-                <div className="absolute bottom-12 left-0 right-0 pointer-events-none flex flex-col items-center justify-center px-4 text-center z-10 space-y-1">
-                  <p className="bg-black/80 text-yellow-300 text-sm md:text-base font-bold px-4 py-1 rounded-lg backdrop-blur-md border border-yellow-500/30 shadow-lg font-mono">
+                {/* مكان الترجمة: في أسفل الشاشة تماماً لعدم التغطية على أحدث المشهد */}
+                <div className="absolute bottom-3 inset-x-0 pointer-events-none flex flex-col items-center justify-center px-4 text-center z-20 space-y-0.5">
+                  <p className="bg-black/80 text-yellow-300 text-xs md:text-sm font-bold px-3 py-0.5 rounded shadow-lg font-sans tracking-wide">
                     {currentSubtitle.en}
                   </p>
-                  <p className="bg-black/80 text-white text-xs md:text-sm font-semibold px-4 py-1 rounded-lg backdrop-blur-md border border-white/10 shadow-lg">
+                  <p className="bg-black/80 text-white text-xs md:text-sm font-semibold px-3 py-0.5 rounded shadow-lg font-sans dir-rtl">
                     {currentSubtitle.ar}
                   </p>
                 </div>
-              </>
+              </div>
             ) : (
               <iframe 
                 src="https://www.youtube.com/embed/WKAntgNZPFs?cc_load_policy=1&hl=ar"
