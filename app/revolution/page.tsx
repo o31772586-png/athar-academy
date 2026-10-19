@@ -23,12 +23,14 @@ export default function RevolutionCoursePage() {
         <div className="lg:col-span-2 space-y-4">
           <div className="relative w-full aspect-video bg-slate-950 rounded-3xl overflow-hidden border border-indigo-500/20 shadow-2xl flex items-center justify-center">
             {mediaType === 'video' ? (
-              // مشغل الفيديو المباشر المسار الصحيح
+              // مشغل الفيديو المباشر المعدل للعمل على Vercel
               <video 
                 controls 
                 className="w-full h-full object-contain"
-                src="/friends-scene.mp4"
+                preload="metadata"
+                key="friends-video-player"
               >
+                <source src="/friends-scene.mp4" type="video/mp4" />
                 متصفحك لا يدعم تشغيل الفيديو.
               </video>
             ) : (
@@ -59,46 +61,4 @@ export default function RevolutionCoursePage() {
               </div>
               <div className="pt-2 border-t border-slate-800">
                 <span className="text-cyan-400 block mb-1">🇪🇬 الترجمة العربية الفورية:</span>
-                <p className="text-slate-200">"انظر، كان من المفترض أن يكون هذا أمراً خاصاً وشخصياً بيننا."</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* لوحة الاختيار وتبديل المشاهد */}
-        <div className="bg-slate-900/80 border border-indigo-500/20 p-6 rounded-3xl h-fit space-y-4">
-          <h2 className="text-lg font-bold text-white flex items-center gap-2">
-            <span>📺</span>
-            <span>مصادر المشاهد</span>
-          </h2>
-
-          <div className="space-y-3">
-            <button
-              onClick={() => setMediaType('video')}
-              className={`w-full text-right p-4 rounded-2xl border text-xs font-bold transition flex items-center justify-between ${
-                mediaType === 'video' ? 'bg-cyan-500/20 border-cyan-400 text-cyan-300' : 'bg-slate-950/40 border-indigo-500/10 text-slate-400'
-              }`}
-            >
-              <div className="flex items-center gap-2">
-                <span>🎬</span>
-                <span>مشهد Friends (فيديو مباشر)</span>
-              </div>
-            </button>
-
-            <button
-              onClick={() => setMediaType('youtube')}
-              className={`w-full text-right p-4 rounded-2xl border text-xs font-bold transition flex items-center justify-between ${
-                mediaType === 'youtube' ? 'bg-cyan-500/20 border-cyan-400 text-cyan-300' : 'bg-slate-950/40 border-indigo-500/10 text-slate-400'
-              }`}
-            >
-              <div className="flex items-center gap-2">
-                <span>▶️</span>
-                <span>محاضرة اليوتيوب المترجمة</span>
-              </div>
-            </button>
-          </div>
-        </div>
-      </div>
-    </main>
-  );
-}
+                <p className="text
