@@ -35,6 +35,13 @@ export default function RevolutionCoursePage() {
     }
   };
 
+  const handleRepeatSentence = (start: number) => {
+    if (videoRef.current) {
+      videoRef.current.currentTime = start;
+      videoRef.current.play();
+    }
+  };
+
   return (
     <main className="max-w-6xl mx-auto px-4 py-8 dir-rtl">
       {/* العنوان العلوي */}
@@ -66,7 +73,7 @@ export default function RevolutionCoursePage() {
                   متصفحك لا يدعم تشغيل الفيديو.
                 </video>
 
-                {/* مكان الترجمة: في أسفل الشاشة تماماً لعدم التغطية على أحدث المشهد */}
+                {/* الترجمة السينمائية في أسفل الشاشة تماماً */}
                 <div className="absolute bottom-3 inset-x-0 pointer-events-none flex flex-col items-center justify-center px-4 text-center z-20 space-y-0.5">
                   <p className="bg-black/80 text-yellow-300 text-xs md:text-sm font-bold px-3 py-0.5 rounded shadow-lg font-sans tracking-wide">
                     {currentSubtitle.en}
@@ -85,23 +92,69 @@ export default function RevolutionCoursePage() {
               ></iframe>
             )}
           </div>
+
+          {/* صندوق معلومات إضافية والتحليل القديم */}
+          <div className="bg-slate-900/80 border border-cyan-500/30 p-6 rounded-2xl space-y-4 shadow-xl">
+            <div className="flex items-center justify-between">
+              <h4 className="text-sm font-bold text-white flex items-center gap-2">
+                <span>🤖</span>
+                <span>التحليل والتكرار التفاعلي (Listen & Repeat)</span>
+              </h4>
+              <span className="text-xs text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-full font-bold animate-pulse">🟢 متزامن مع الفيديو</span>
+            </div>
+            <p className="text-[12px] text-slate-300">
+              استمع للمشهد وتابع الترجمة السينمائية أسفل الفيديو مباشرة، ويمكنك الضغط على أي جملة في القائمة الجانبية لإعادة التدريب عليها فوراً.
+            </p>
+          </div>
         </div>
 
-        {/* لوحة التحكم الجانبية */}
+        {/* لوحة سكربت الحوار والمصادر القديمة بالكامل */}
         <div className="bg-slate-900/80 border border-indigo-500/20 p-6 rounded-3xl h-fit space-y-4">
           <h2 className="text-lg font-bold text-white flex items-center gap-2">
-            <span>📺</span>
-            <span>مصدر الفيديو</span>
+            <span>📜</span>
+            <span>سكربت المشهد (اضغط للتدريب)</span>
           </h2>
-          <div className="space-y-3">
-            <button
-              onClick={() => setMediaType('video')}
-              className={`w-full text-right p-4 rounded-2xl border text-xs font-bold transition flex items-center justify-between ${
-                mediaType === 'video' ? 'bg-cyan-500/20 border-cyan-400 text-cyan-300' : 'bg-slate-950/40 border-indigo-500/10 text-slate-400'
-              }`}
-            >
-              <span>🎬 مشهد Friends (مباشر)</span>
-            </button>
+
+          <div className="space-y-3 max-h-[280px] overflow-y-auto pl-1">
+            {transcriptData.map((item, index) => (
+              <button
+                key={index}
+                onClick={() => handleRepeatSentence(item.start)}
+                className={`w-full text-right p-3 rounded-2xl border text-xs transition flex flex-col gap-1 ${
+                  currentSubtitle.start === item.start 
+                    ? 'bg-cyan-500/25 border-cyan-400 text-white shadow-lg' 
+                    : 'bg-slate-950/40 border-indigo-500/10 text-slate-400 hover:bg-slate-800/50'
+                }`}
+              >
+                <div className="flex justify-between items-center w-full">
+                  <span className="font-mono text-[10px] text-cyan-300">[{item.start}s - {item.end}s]</span>
+                  <span className="text-[10px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded">كرر 🔄</span>
+                </div>
+                <p className="font-medium">{item.en}</p>
+              </button>
+            ))}
+          </div>
+
+          <div className="pt-2 border-t border-slate-800">
+            <h3 className="text-xs font-bold text-slate-300 mb-2">📺 مصادر المشاهد المتاحة</h3>
+            <div className="space-y-2">
+              <button
+                onClick={() => setMediaType('video')}
+                className={`w-full text-right p-3 rounded-xl border text-xs font-bold transition flex items-center justify-between ${
+                  mediaType === 'video' ? 'bg-cyan-500/20 border-cyan-400 text-cyan-300' : 'bg-slate-950/40 border-indigo-500/10 text-slate-400'
+                }`}
+              >
+                <span>🎬 مشهد Friends (فيديو مباشر)</span>
+              </button>
+              <button
+                onClick={() => setMediaType('youtube')}
+                className={`w-full text-right p-3 rounded-xl border text-xs font-bold transition flex items-center justify-between ${
+                  mediaType === 'youtube' ? 'bg-cyan-500/20 border-cyan-400 text-cyan-300' : 'bg-slate-950/40 border-indigo-500/10 text-slate-400'
+                }`}
+              >
+                <span>▶️ محاضرة اليوتيوب المترجمة</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
