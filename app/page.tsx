@@ -40,7 +40,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 2. قسم الكلام الإقنعي الشامل (قصتنا فلسفتنا وليه أكاديمية أثر) */}
+      {/* 2. قسم الكلام الإقناعي الشامل (قصتنا وفلسفتنا ولماذا أكاديمية أثر) */}
       <section className="py-20 px-4 max-w-5xl mx-auto space-y-16">
         
         {/* فقرة أولى: المشكلة والحل */}
@@ -101,7 +101,7 @@ export default function Home() {
 
         <div className="space-y-12">
 
-          {/* 🇺🇸 كورس 1: اللغة الإنجليزية (ورشه Friends و كورس ريفلوشن) */}
+          {/* 🇺🇸 كورس 1: اللغة الإنجليزية (ورشة Friends وكورس ريفلوشن) */}
           <div className="bg-slate-900/80 border border-cyan-500/30 rounded-3xl p-8 md:p-10 space-y-6 shadow-2xl relative overflow-hidden">
             <div className="flex flex-wrap justify-between items-center gap-4">
               <div className="flex items-center gap-3">
@@ -155,7 +155,7 @@ export default function Home() {
             </p>
 
             <div className="pt-4 border-t border-slate-800/80 flex items-center justify-between">
-              <span className="text-xs text-slate-400">يشمل: القواعد، المحادثة، واختبارات الممارسة</span>
+              <span className="text-xs text-slate-400">يشمل: القواعد، المحادثة، وااختبارات الممارسة</span>
               <button disabled className="bg-slate-800 text-slate-500 font-bold px-6 py-3 rounded-2xl text-xs cursor-not-allowed">
                 انتظروا الإطلاق ⏳
               </button>
