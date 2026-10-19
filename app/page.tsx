@@ -1,163 +1,203 @@
 'use client';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
-export default function Home() {
+export default function HomePage() {
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    // التحقق هل الحساب الحالي هو مدير المنصة الأدمن أم طالب
+    const adminStatus = localStorage.getItem('isAdmin');
+    if (adminStatus === 'true') {
+      setIsAdmin(true);
+    }
+  }, []);
+
+  const courses = [
+    {
+      id: 'eng-101',
+      title: 'طلاقة اللغة الإنجليزية الشاملة (English Fluency)',
+      category: 'اللغات الأجنبية 🇬🇧',
+      price: '299 ج.م',
+      instructor: 'م. عمر عبد العزيز',
+      image: 'https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=800&q=80',
+      description: 'اتقن المحادثة والصوتيات من الصفر وتحدث بثقة بدون خوف مع تدريبات تفاعلية حية.',
+      level: 'من المبتدئ للمتقدم'
+    },
+    {
+      id: 'ger-101',
+      title: 'كورس اللغة الألمانية الشامل (Deutsch A1-B2)',
+      category: 'اللغات الأجنبية 🇩🇪',
+      price: '349 ج.م',
+      instructor: 'د. أحمد حسن',
+      image: 'https://images.unsplash.com/photo-1527866512907-a35a62a7f6be?auto=format&fit=crop&w=800&q=80',
+      description: 'طريقك المباشر للسفر والدراسة في ألمانيا، تغطية كاملة للقواعد وامتحانات Goethe.',
+      level: 'جميع المستويات'
+    },
+    {
+      id: 'turk-101',
+      title: 'احتراف اللغة التركية للمحادثة والإتقان 🇹🇷',
+      category: 'اللغات الأجنبية 🇹🇷',
+      price: '279 ج.م',
+      instructor: 'أ. سارة محمود',
+      image: 'https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=800&q=80',
+      description: 'تعلم التركية اليومية، التعامل مع السكان المحليين، وقواعد النطق الصحيح بسهولة.',
+      level: 'مبتدئ - متوسط'
+    },
+    {
+      id: 'cs-101',
+      title: 'دبلومة البرمجة وتطوير المواقع الكاملة (Full-Stack)',
+      category: 'التكنولوجيا والبرمجة 💻',
+      price: '399 ج.م',
+      instructor: 'م. عمر عبد العزيز',
+      image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80',
+      description: 'تعلم JavaScript, React, Next.js وبناء مشاريع واقعية حقيقية تؤهلك لسوق العمل.',
+      level: 'احترافي'
+    }
+  ];
+
   return (
-    <main className="min-h-screen bg-slate-950 text-white dir-rtl selection:bg-cyan-500 selection:text-black">
+    <main className="min-h-screen bg-slate-950 text-slate-100 dir-rtl overflow-x-hidden selection:bg-cyan-500 selection:text-black">
       
-      {/* 1. قسم البداية والترحيب العريض (Hero Section) */}
-      <section className="relative overflow-hidden py-24 px-4 border-b border-indigo-500/10">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.2),rgba(255,255,255,0))]"></div>
-        <div className="max-w-5xl mx-auto text-center relative z-10 space-y-6">
-          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-cyan-500/10 border border-cyan-400/30 text-cyan-300 text-xs md:text-sm font-bold shadow-xl">
-            <span>✨</span>
-            <span>الجيل الجديد من منصات تعلم اللغات وتطوير الذات</span>
-          </div>
-          
-          <h1 className="text-4xl md:text-7xl font-black tracking-tight leading-tight">
-            مرحباً بك في <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-indigo-300 to-indigo-500">أكاديمية أثر</span> 🚀
-          </h1>
-          
-          <p className="text-slate-300 text-base md:text-xl max-w-3xl mx-auto leading-relaxed">
-            نحن لا نقدم مجرد دروس تقليدية أو حفظ قواعد جاف.. نحن نحدث ثورة في أسلوب التعلم! نسير معك خطوة بخطوة من الصفر حتى الطلاقة الكاملة عبر محاكاة واقعية وتقنيات تفاعلية حية تترك أثراً حقيقياً في حياتك ومستقبلك.
-          </p>
+      {/* 1. Hero Section - الواجهة الرئيسية */}
+      <section className="relative py-20 md:py-32 px-6 overflow-hidden border-b border-indigo-500/10">
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-cyan-500/20 to-indigo-600/20 rounded-full blur-[120px] pointer-events-none"></div>
 
-          <div className="flex flex-wrap justify-center gap-4 pt-6">
-            <a 
-              href="#explore-courses" 
-              className="bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-slate-950 font-black px-8 py-4 rounded-2xl shadow-2xl transition transform hover:-translate-y-1 text-sm md:text-base"
-            >
-              استكشف المسارات والكورسات 🎯
-            </a>
-            <Link 
-              href="/revolution" 
-              className="bg-slate-900 border border-indigo-500/30 hover:border-cyan-400/50 text-slate-200 font-bold px-8 py-4 rounded-2xl transition text-sm md:text-base flex items-center gap-2"
-            >
-              <span>🎧 تجربة ورشة Friends الحية</span>
-              <span className="text-cyan-400">←</span>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* 2. قسم الكلام الإقناعي الشامل (قصتنا وفلسفتنا ولماذا أكاديمية أثر) */}
-      <section className="py-20 px-4 max-w-5xl mx-auto space-y-16">
-        
-        {/* فقرة المشكلة والحل */}
-        <div className="bg-slate-900/60 border border-indigo-500/20 rounded-3xl p-8 md:p-12 space-y-6 shadow-2xl relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/5 rounded-full blur-3xl"></div>
-          <span className="text-cyan-400 text-xs font-bold block tracking-widest">💡 رؤيتنا وفلسفتنا</span>
-          <h2 className="text-2xl md:text-4xl font-black text-white leading-snug">
-            لماذا تضيع سنوات في طرق التعلم القديمة بينما يمكنك إتقان المهارة في أشهر؟
-          </h2>
-          <p className="text-slate-300 text-sm md:text-base leading-relaxed space-y-4">
-            معظم الناس يقضون سنوات طويلة في حفظ القواعد والكلمات المعزولة، وعندما يواجهون متحدثاً أصلياً أو موقفاً حقيقياً يتجمدون! في <strong className="text-cyan-300">أكاديمية أثر</strong>، غيرنا هذه المعادلة تماماً. نحن نؤمن بأن اللغة والمهارة تُكتسب بالاستماع الفعال، المحاكاة الفورية، والتكرار الذكي.
-          </p>
-        </div>
-
-        {/* مميزات بالرموز */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="bg-slate-900/40 border border-indigo-500/10 p-6 rounded-3xl space-y-3">
-            <div className="text-3xl">🎯</div>
-            <h3 className="text-lg font-bold text-white">تطبيق عملي من أول دقيقة</h3>
-            <p className="text-slate-400 text-xs md:text-sm leading-relaxed">
-              لا تنظير ولا تعقيد، تدخل المحاضرة لتتكلم وتستمع وتتفاعل فوراً مع المواقف الحقيقية.
-            </p>
-          </div>
-
-          <div className="bg-slate-900/40 border border-indigo-500/10 p-6 rounded-3xl space-y-3">
-            <div className="text-3xl">⚡</div>
-            <h3 className="text-lg font-bold text-white">أدوات تفاعلية متطورة</h3>
-            <p className="text-slate-400 text-xs md:text-sm leading-relaxed">
-              أنظمة Listen & Repeat والترجمة المتزامنة المدمجة لضمان إتقان النطق ومتابعة تقدمك ثانية بثانية.
-            </p>
-          </div>
-
-          <div className="bg-slate-900/40 border border-indigo-500/10 p-6 rounded-3xl space-y-3">
-            <div className="text-3xl">👑</div>
-            <h3 className="text-lg font-bold text-white">جودة بلا مساومة</h3>
-            <p className="text-slate-400 text-xs md:text-sm leading-relaxed">
-              محتوى مصمم بعناية فائقة ليعطيك أقصى قيمة تعليمية وبأعلى معايير بصرية وتقنية.
-            </p>
-          </div>
-        </div>
-
-      </section>
-
-      {/* 3. قسم استعراض اللغات والكورسات التفصيلي */}
-      <section id="explore-courses" className="py-20 px-4 max-w-6xl mx-auto border-t border-indigo-500/10 space-y-16">
-        
-        <div className="text-center space-y-3">
-          <span className="text-cyan-400 text-xs font-bold bg-cyan-500/10 px-4 py-1.5 rounded-full border border-cyan-400/20 inline-block">
-            📚 دليل الكورسات والمسارات الشامل
+        <div className="max-w-6xl mx-auto text-center relative z-10">
+          <span className="inline-block bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 px-4 py-1.5 rounded-full text-xs md:text-sm font-bold mb-6 backdrop-blur-md">
+            🚀 المنصة التعليمية الرائدة للغات والبرمجة 2026
           </span>
-          <h2 className="text-3xl md:text-5xl font-black text-white">
-            اختر لغتك أو مسارك وابدأ رحلتك فوراً
-          </h2>
-          <p className="text-slate-400 text-xs md:text-sm max-w-2xl mx-auto">
-            تصفح الأقسام والبرامج المتاحة والمستقبلية بالتفصيل، واكتشف ما ستتعلمه في كل مسار.
+
+          <h1 className="text-4xl md:text-7xl font-black text-white leading-tight mb-6">
+            ارتقِ بمهاراتك مع <br />
+            <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent">
+              أكاديمية أثر التعليمية
+            </span>
+          </h1>
+
+          <p className="text-slate-400 text-base md:text-xl max-w-3xl mx-auto leading-relaxed mb-10">
+            محتوى تعليمي نادر ومصمم بأعلى جودة لمساعدتك على إتقان اللغات الأجنبية والبرمجة مع تطبيق عملي ومتابعة شخصية مستمرة خطوة بخطوة.
           </p>
-        </div>
 
-        <div className="space-y-12">
-
-          {/* 🇺🇸 1. اللغة الإنجليزية */}
-          <div className="bg-slate-900/80 border border-cyan-500/30 rounded-3xl p-8 md:p-10 space-y-6 shadow-2xl relative overflow-hidden">
-            <div className="flex flex-wrap justify-between items-center gap-4">
-              <div className="flex items-center gap-3">
-                <span className="text-3xl">🇺🇸</span>
-                <div>
-                  <span className="text-cyan-400 text-xs font-bold block">مسار المحادثة والطلاقة</span>
-                  <h3 className="text-2xl md:text-3xl font-black text-white">كورس ريفلوشن - ورشة محادثات Friends الحية</h3>
-                </div>
-              </div>
-              <span className="text-xs text-emerald-400 font-bold bg-emerald-500/10 border border-emerald-500/20 px-4 py-1.5 rounded-full">
-                🟢 متاح الآن للتعلم المباشر
-              </span>
-            </div>
-
-            <p className="text-slate-300 text-sm md:text-base leading-relaxed">
-              هذا ليس كورساً عادياً للقواعد، بل ورشة عمل سينمائية تعتمد على تحليل مقاطع ومشاهد حقيقية من المسلسل الشهير Friends. ستتعلم التعبيرات الدارجة، كيفية نطق الكلمات كالمتحدث الأصلي، مع نظام تكرار تفاعلي وترجمة سريعة متزامنة ثانية بثانية لتكسر حاجز الخوف وتتحدث بطلاقة.
-            </p>
-
-            <div className="pt-4 border-t border-slate-800 flex flex-wrap justify-between items-center gap-4">
-              <div className="text-xs text-slate-400 flex items-center gap-4">
-                <span>⏱️ مشغل تفاعلي خاص</span>
-                <span>🎧 نظام Listen & Repeat</span>
-                <span>💬 ترجمة متزامنة</span>
-              </div>
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
+            <Link 
+              href="#courses" 
+              className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-black rounded-2xl shadow-xl shadow-cyan-500/20 transition-all duration-300 text-base"
+            >
+              استكشف الكورسات المتاحة 📚
+            </Link>
+            
+            {isAdmin ? (
               <Link 
-                href="/revolution" 
-                className="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black px-6 py-3 rounded-2xl text-xs md:text-sm transition shadow-lg"
+                href="/admin" 
+                className="w-full sm:w-auto px-8 py-4 bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/40 text-emerald-300 font-bold rounded-2xl transition duration-300 text-base flex items-center justify-center gap-2"
               >
-                دخول الكورس والتجربة المباشرة ↩️
+                <span>👑 لوحة التحكم المالية والمدير</span>
               </Link>
-            </div>
+            ) : (
+              <Link 
+                href="/login" 
+                className="w-full sm:w-auto px-8 py-4 bg-slate-900/80 hover:bg-slate-800 border border-indigo-500/30 text-white font-bold rounded-2xl transition duration-300 text-base"
+              >
+                انشئ حسابك الآن 🚀
+              </Link>
+            )}
           </div>
 
-          {/* 🇩🇪 2. اللغة الألمانية */}
-          <div className="bg-slate-900/60 border border-indigo-500/20 rounded-3xl p-8 md:p-10 space-y-6 shadow-xl">
-            <div className="flex flex-wrap justify-between items-center gap-4">
-              <div className="flex items-center gap-3">
-                <span className="text-3xl">🇩🇪</span>
-                <div>
-                  <span className="text-yellow-400 text-xs font-bold block">مسار اللغة الألمانية</span>
-                  <h3 className="text-2xl md:text-3xl font-black text-white">كورس الألمانية الشامل (Deutsch Masterclass)</h3>
+          {/* إحصائيات المنصة */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 pt-12 border-t border-slate-800/80">
+            <div>
+              <div className="text-3xl md:text-4xl font-black text-cyan-400">+10,000</div>
+              <div className="text-xs md:text-sm text-slate-400 mt-1">طالب مشترك</div>
+            </div>
+            <div>
+              <div className="text-3xl md:text-4xl font-black text-blue-400">98%</div>
+              <div className="text-xs md:text-sm text-slate-400 mt-1">نسبة رضا الطلاب</div>
+            </div>
+            <div>
+              <div className="text-3xl md:text-4xl font-black text-indigo-400">+150</div>
+              <div className="text-xs md:text-sm text-slate-400 mt-1">ساعة تدريبية حية</div>
+            </div>
+            <div>
+              <div className="text-3xl md:text-4xl font-black text-emerald-400">24/7</div>
+              <div className="text-xs md:text-sm text-slate-400 mt-1">دعم فني وتطبيقي</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 2. معرض الكورسات المتاحة */}
+      <section id="courses" className="py-20 px-6 max-w-6xl mx-auto">
+        <div className="text-center mb-16">
+          <span className="text-cyan-400 font-bold text-sm block mb-2">📚 الكورسات المتاحة حالياً</span>
+          <h2 className="text-3xl md:text-5xl font-black text-white mb-4">اختر كورس وباشر رحلتك فوراً 🚀</h2>
+          <p className="text-slate-400 text-sm max-w-xl mx-auto">تصفح البوسترات الرسمية للكورسات واشترك بضغطة زر واحدة.</p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {courses.map((course) => (
+            <div 
+              key={course.id} 
+              className="bg-slate-900/80 border border-indigo-500/20 rounded-3xl overflow-hidden shadow-2xl hover:border-cyan-500/50 transition duration-300 flex flex-col group"
+            >
+              {/* صورة الغلاف */}
+              <div className="relative h-56 overflow-hidden">
+                <img 
+                  src={course.image} 
+                  alt={course.title} 
+                  className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+                />
+                <div className="absolute top-4 right-4 bg-slate-950/80 backdrop-blur-md px-3 py-1 rounded-xl text-xs font-bold text-cyan-400 border border-cyan-500/30">
+                  {course.category}
+                </div>
+                <div className="absolute bottom-4 left-4 bg-slate-950/90 backdrop-blur-md px-3 py-1.5 rounded-xl text-xs font-bold text-slate-300">
+                  {course.level}
                 </div>
               </div>
-              <span className="text-xs text-amber-300 font-bold bg-amber-500/10 border border-amber-500/20 px-4 py-1.5 rounded-full">
-                ⏳ قريباً في الأكاديمية
-              </span>
+
+              {/* التفاصيل */}
+              <div className="p-6 flex flex-col grow">
+                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-cyan-400 transition">
+                  {course.title}
+                </h3>
+                <p className="text-slate-400 text-xs leading-relaxed mb-4 grow">
+                  {course.description}
+                </p>
+
+                <div className="flex justify-between items-center pt-4 border-t border-slate-800">
+                  <div>
+                    <span className="text-[10px] text-slate-500 block">المحاضر</span>
+                    <span className="text-xs font-bold text-slate-300">{course.instructor}</span>
+                  </div>
+                  <div className="text-left">
+                    <span className="text-[10px] text-slate-500 block">الاستثمار</span>
+                    <span className="text-lg font-black text-cyan-400">{course.price}</span>
+                  </div>
+                </div>
+
+                {/* التميز الذكي: الأدمن يظهر له فتح مباشر، بينما الطالب يظهر له زرار الشراء */}
+                {isAdmin ? (
+                  <Link 
+                    href={`/course/${course.id}`}
+                    className="mt-6 w-full py-3.5 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 font-bold rounded-xl text-center text-sm transition flex items-center justify-center gap-2"
+                  >
+                    <span>معاينة وفتح المحاضرة مباشرة 👁️👑</span>
+                  </Link>
+                ) : (
+                  <Link 
+                    href="/checkout" 
+                    className="mt-6 w-full py-3.5 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-black rounded-xl text-center text-sm shadow-md transition"
+                  >
+                    اشترك الآن في الكورس ⚡
+                  </Link>
+                )}
+
+              </div>
             </div>
+          ))}
+        </div>
+      </section>
 
-            <p className="text-slate-300 text-sm md:text-base leading-relaxed">
-              دليلك الكامل لإتقان اللغة الألمانية من مستويات A1 حتى المستويات المتقدمة. يركز الكورس على تفكيك عقدة القواعد الألمانية الصعبة، وتبسيط تركيب الجمل، مع التدريب على محادثات السفر، العمل، والدراسة في ألمانيا بلغة نقية ومبسطة.
-            </p>
-
-            <div className="pt-4 border-t border-slate-800/80 flex items-center justify-between">
-              <span className="text-xs text-slate-400">يشمل: القواعد، المحادثة، واختبارات الممارسة</span>
-              <button disabled className="bg-slate-800 text-slate-500 font-bold px-6 py-3 rounded-2xl text-xs cursor-not-allowed">
-                انتظروا الإطلاق ⏳
-              </
-
-
+    </main>
+  );
+}
