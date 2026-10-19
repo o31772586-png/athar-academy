@@ -23,11 +23,11 @@ export default function RevolutionCoursePage() {
         <div className="lg:col-span-2 space-y-4">
           <div className="relative w-full aspect-video bg-slate-950 rounded-3xl overflow-hidden border border-indigo-500/20 shadow-2xl flex items-center justify-center">
             {mediaType === 'video' ? (
-              // مشغل الفيديو المباشر من سيرفر المنصة
+              // مشغل الفيديو المباشر المسار الصحيح
               <video 
                 controls 
                 className="w-full h-full object-contain"
-                src="/friends.mp4"
+                src="/friends-scene.mp4"
               >
                 متصفحك لا يدعم تشغيل الفيديو.
               </video>
@@ -55,7 +55,7 @@ export default function RevolutionCoursePage() {
             <div className="space-y-3 bg-slate-950/60 p-4 rounded-xl border border-indigo-500/10 text-xs">
               <div>
                 <span className="text-slate-400 block mb-1">🇺🇸 النص الأصلي بالمشهد (English):</span>
-                <p className="text-white font-mono">"Look, that was supposed to be a private, personal thing between us.[span_0](start_span)"[span_0](end_span)</p>
+                <p className="text-white font-mono">"Look, that was supposed to be a private, personal thing between us."</p>
               </div>
               <div className="pt-2 border-t border-slate-800">
                 <span className="text-cyan-400 block mb-1">🇪🇬 الترجمة العربية الفورية:</span>
